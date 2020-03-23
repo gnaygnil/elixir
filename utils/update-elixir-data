@@ -1,6 +1,7 @@
 #!/bin/sh
 
-root=$1
+#root=$1
+root=/opt/elixir-data
 
 if [ ! -e "$root" ]
 then
@@ -13,13 +14,14 @@ if [ -z "$ELIXIR_INSTALL" ]; then
     exit 1
 fi
 
-for p in linux u-boot busybox zephyr musl barebox uclibc-ng arm-trusted-firmware amazon-freertos qemu glibc coreboot llvm mesa ofono dpdk; do
+#for p in linux u-boot busybox zephyr musl barebox uclibc-ng arm-trusted-firmware amazon-freertos qemu glibc coreboot llvm mesa ofono dpdk; do
+for p in linux minix zircon freertos; do
     echo "Processing project $root/$p ..."
     export LXR_DATA_DIR=$root/$p/data
     export LXR_REPO_DIR=$root/$p/repo
 
-    cd $LXR_REPO_DIR
-    git fetch --all --tags
+#    cd $LXR_REPO_DIR
+#    git fetch --all --tags
 
     cd $ELIXIR_INSTALL
     ./update.py
